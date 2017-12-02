@@ -1,0 +1,126 @@
+_sfdx_completion()
+{
+	local cur prev sfdx_comp_words sfdx_comp_cword
+	COMPREPLY=()
+	__reassemble_comp_words_by_ref : sfdx_comp_words sfdx_comp_cword
+	cur="${sfdx_comp_words[sfdx_comp_cword]}"
+	prev="${sfdx_comp_words[sfdx_comp_cword-1]}"
+	if [ "$sfdx_comp_cword" -eq "1" ]
+	then
+		COMPREPLY=( $(egrep "^$cur" <<EOF
+force
+force:alias
+force:alias:list
+force:alias:set
+force:apex
+force:apex:class:create
+force:apex:execute
+force:apex:log:get
+force:apex:log:list
+force:apex:test:report
+force:apex:test:run
+force:auth
+force:auth:jwt:grant
+force:auth:sfdxurl:store
+force:auth:web:login
+force:config
+force:config:get
+force:config:list
+force:config:set
+force:data
+force:data:bulk:delete
+force:data:bulk:status
+force:data:bulk:upsert
+force:data:record:create
+force:data:record:delete
+force:data:record:get
+force:data:record:update
+force:data:soql:query
+force:data:tree:export
+force:data:tree:import
+force:doc
+force:doc:s:display
+force:doc:s:list
+force:lightning
+force:lightning:app:create
+force:lightning:component:create
+force:lightning:event:create
+force:lightning:interface:create
+force:lightning:lint
+force:lightning:test:create
+force:lightning:test:install
+force:lightning:test:run
+force:limits
+force:limits:api:display
+force:mdapi
+force:mdapi:convert
+force:mdapi:deploy
+force:mdapi:deploy:report
+force:mdapi:retrieve
+force:mdapi:retrieve:report
+force:org
+force:org:create
+force:org:delete
+force:org:display
+force:org:list
+force:org:open
+force:org:shape:create
+force:org:shape:delete
+force:org:shape:list
+force:package
+force:package1
+force:package1:version:create
+force:package1:version:create:get
+force:package1:version:display
+force:package1:version:list
+force:package2
+force:package2:create
+force:package2:list
+force:package2:update
+force:package2:version:create
+force:package2:version:create:get
+force:package2:version:create:list
+force:package2:version:get
+force:package2:version:list
+force:package2:version:update
+force:package:install
+force:package:installed:list
+force:package:install:get
+force:package:uninstall
+force:package:uninstall:get
+force:project
+force:project:create
+force:project:upgrade
+force:schema
+force:schema:sobject:describe
+force:schema:sobject:list
+force:source
+force:source:convert
+force:source:open
+force:source:pull
+force:source:push
+force:source:status
+force:user
+force:user:create
+force:user:display
+force:user:list
+force:user:password:generate
+force:user:permset:assign
+force:visualforce
+force:visualforce:component:create
+force:visualforce:page:create
+help
+plugins
+plugins
+plugins:install
+plugins:link
+plugins:uninstall
+plugins:update
+update
+EOF
+) )
+		__ltrim_colon_completions $cur
+	fi
+}
+complete -F _sfdx_completion sfdx
+
