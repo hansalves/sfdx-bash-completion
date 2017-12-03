@@ -6,6 +6,6 @@ Bash completion for the [sfdx cli](https://developer.salesforce.com/tools/sfdxcl
 
 currently only the first parameter works
 
-# installation
+## installation
 
 place `sfdx` in `/etc/bash_completion.d/`

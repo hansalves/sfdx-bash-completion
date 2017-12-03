@@ -2,6 +2,9 @@ _sfdx_completion()
 {
 	local cur prev sfdx_comp_words sfdx_comp_cword
 	COMPREPLY=()
+	# since the sfdx parameters contain colons the normal COMP_WORDS and
+	# COMP_CWORD variables can't be used, but the given parameters have
+	# to be reassembled into new parameters with the following command
 	__reassemble_comp_words_by_ref : sfdx_comp_words sfdx_comp_cword
 	cur="${sfdx_comp_words[sfdx_comp_cword]}"
 	prev="${sfdx_comp_words[sfdx_comp_cword-1]}"
@@ -119,8 +122,9 @@ plugins:update
 update
 EOF
 ) )
+		# This will remove the already given part up to the last colon
+		# from the options in COMPREPLY
 		__ltrim_colon_completions $cur
 	fi
 }
 complete -F _sfdx_completion sfdx
-
