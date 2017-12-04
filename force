@@ -11,6 +11,8 @@ _force_completion()
 	if [ "$COMP_CWORD" -eq "1" ]
 	then
 		COMPREPLY=( $(compgen -W "$opts" -- "${cur}") )
+	else
+		_filedir
 	fi
 }
 complete -F _force_completion force

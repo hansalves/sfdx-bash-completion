@@ -124,7 +124,9 @@ EOF
 ) )
 		# This will remove the already given part up to the last colon
 		# from the options in COMPREPLY
-		__ltrim_colon_completions $cur
+		__ltrim_colon_completions "$cur"
+	else
+		_filedir
 	fi
 }
 complete -F _sfdx_completion sfdx
