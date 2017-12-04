@@ -8,7 +8,7 @@ _sfdx_completion()
 	__reassemble_comp_words_by_ref : sfdx_comp_words sfdx_comp_cword
 	cur="${sfdx_comp_words[sfdx_comp_cword]}"
 	prev="${sfdx_comp_words[sfdx_comp_cword-1]}"
-	if [ "$sfdx_comp_cword" -eq "1" ]
+	if [ "$sfdx_comp_cword" -eq 1 ] || [ "$prev" = "help" ]
 	then
 		COMPREPLY=( $(egrep "^$cur" <<EOF
 force

@@ -8,7 +8,7 @@ _force_completion()
 		eventlogfile export fetch field help import limits log login logins \
 		logout notify oauth password push query record rest security sobject \
 		test trace update usedxauth version whoami"
-	if [ "$COMP_CWORD" -eq "1" ]
+	if [ "$COMP_CWORD" -eq 1 ] || [ "$prev" = "help" ]
 	then
 		COMPREPLY=( $(compgen -W "$opts" -- "${cur}") )
 	else
