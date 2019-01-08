@@ -116,10 +116,16 @@ EOF
 	elif [ "$prev" = "-u" ] || [ "$prev" = "--targetusername" ]
 	then
 		local users=""
-		if [ -d .sfdx/orgs ]
-		then
-			users="$users `ls .sfdx/orgs`"
-		fi
+		# users in .sfdx/orgs should also be in ~/.sfdx, so this is not necessary
+		# local dir='.'
+		# while ! [ -d "$dir/.sfdx/orgs" ] && ! [ "`realpath -e "$dir"`" == "/" ]
+		# do
+		# 	dir="../$dir"
+		# done
+		# if [ -d "$dir/.sfdx/orgs" ]
+		# then
+		# 	users="$users `ls "$dir/.sfdx/orgs"`"
+		# fi
 		if [ -d ~/.sfdx ]
 		then
 			users="$users `ls ~/.sfdx/ | grep '@'`"
@@ -128,7 +134,7 @@ EOF
 		then
 			users="$users `jq '.orgs | keys[]' -r ~/.sfdx/alias.json`"
 		fi
-		COMPREPLY=( $(printf "$users" | sed -e 's/ /\n/g' | sort | egrep "^$cur") )
+		COMPREPLY=( $(printf "$users" | sed -e 's/ /\n/g' | sort -u | egrep "^$cur") )
 	else
 		_filedir
 	fi
