@@ -128,7 +128,7 @@ EOF
 		# fi
 		if [ -d ~/.sfdx ]
 		then
-			users="$users `ls ~/.sfdx/ | grep '@'`"
+			users="$users `ls ~/.sfdx/ | grep '@'` | sed -e 's/.json$//g'"
 		fi
 		if [ -f ~/.sfdx/alias.json ] && command -v jq >/dev/null 2>&1
 		then
