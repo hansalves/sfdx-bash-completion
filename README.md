@@ -4,7 +4,9 @@ Bash completion for the [sfdx cli](https://developer.salesforce.com/tools/sfdxcl
 
 **This is a work in progress**
 
-currently only the first parameter works
+Right now it supports the action, the help parameter and the -u or --targetusername parameter.
+
+To be able to support aliases for users the `jq` command is required.
 
 ## installation
 

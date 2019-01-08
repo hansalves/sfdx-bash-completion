@@ -113,6 +113,22 @@ EOF
 		# This will remove the already given part up to the last colon
 		# from the options in COMPREPLY
 		__ltrim_colon_completions "$cur"
+	elif [ "$prev" = "-u" ] || [ "$prev" = "--targetusername" ]
+	then
+		local users=""
+		if [ -d .sfdx/orgs ]
+		then
+			users="$users `ls .sfdx/orgs`"
+		fi
+		if [ -d ~/.sfdx ]
+		then
+			users="$users `ls ~/.sfdx/ | grep '@'`"
+		fi
+		if [ -f ~/.sfdx/alias.json ] && command -v jq >/dev/null 2>&1
+		then
+			users="$users `jq '.orgs | keys[]' -r ~/.sfdx/alias.json`"
+		fi
+		COMPREPLY=( $(printf "$users" | sed -e 's/ /\n/g' | sort | egrep "^$cur") )
 	else
 		_filedir
 	fi
